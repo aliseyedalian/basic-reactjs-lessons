@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaliS Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="react-container"></div>
+    <script type="text/babel">
+        class CheckBoxComponent extends React.Component {
+            constructor(props) {
+                super(props)
+                this.state = {
+                    checked: false
+                }
+            }
+            onChangeChekonam = () => {
+                this.setState({checked: !this.state.checked})
+            }
+            render(){
+                var message;
+                if(this.state.checked){
+                    message = 'Checked'
+                }else{
+                    message = 'UnChecked'
+                }
+                return(
+                    <div>                        
+                        <input type="checkbox" onChange={this.onChangeChekonam}/>                            
+                        <p>{message}</p>
+                    </div>
+                )                
+            }
+        }
+        ReactDOM.render(<CheckBoxComponent/> , document.getElementById('react-container'))
+    </script>
+</body>
+</html>

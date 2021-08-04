@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaliS Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .note{
+            width: 250px;
+            height: 150px;
+            background-color: yellowgreen;
+            padding: 10px;
+            margin: auto;
+            border: 1px solid blueviolet;
+            box-shadow: 2px 6px 12px rgba(0, 0 , 0 , 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="react-container"></div>
+    <script type="text/babel">
+        class Note extends React.Component { 
+            constructor(props){
+                super(props);
+                this.state = {
+                    editing : false,
+                    text : ""
+                }
+            }
+            edit = () => {
+                this.setState({
+                    editing: true, 
+                })
+            }
+            save = () => {
+                this.setState({
+                    editing: false ,
+                    text : this.refs.newText.value
+                })
+            }
+            delete = () => {
+                this.setState({
+                    text : ""
+                })
+            }
+            renderForm = () => {
+                return(
+                    <div className="note">
+                        <textarea ref = "newText"></textarea>
+                        <button onClick={this.save}>Save</button>
+                    </div>
+                )
+            }
+            renderDisplay = () => {
+                return(
+                    <div className='note'>
+                    <p>{this.state.text}</p>    
+                    <span>
+                        <button onClick = {this.edit}>Edit</button>
+                        <button onClick = {this.delete}>Delete</button>
+                    </span>
+                    </div>
+                ) 
+            }
+            render(){
+                if(this.state.editing){
+                    return this.renderForm();
+                }else{
+                    return this.renderDisplay();
+                }
+            }
+        }
+        ReactDOM.render(<Note></Note> , document.getElementById('react-container'))
+    </script>
+</body>
+</html>
